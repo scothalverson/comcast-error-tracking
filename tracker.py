@@ -85,7 +85,7 @@ while(True):
     uc_errors = sum([int(x) for x in data[-1][-1]])
     print(data[0],(len(data[-1][-1]) > 1), uc_errors, uc_errors - old_uc_errors)
     old_uc_errors = uc_errors
-    with open("log.txt","w") as f:
+    with open("log.txt","a") as f:
         f.write(data[0] + ",")
         f.write(str(len(data[-1][-1]) > 1) + ",")
         f.write(str(uc_errors) + ",")
