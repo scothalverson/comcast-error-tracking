@@ -41,17 +41,20 @@ def initBrowser(auth):
 def getData():
     url = "http://10.0.0.1/network_setup.jst"
     #open URL
-    br.open(url)
-    #get the response
-    data = (br.response().read())
-    #convert to BS4 opbject
-    soup = BeautifulSoup(data, 'lxml')
-    #find the tables in the page
-    table = soup.find_all('table')
-    #store tables from page
-    ds_table = table[0]
-    us_table = table[1]
-    cm_table = table[2]
+    try:
+        br.open(url)
+        #get the response
+        data = (br.response().read())
+        #convert to BS4 opbject
+        soup = BeautifulSoup(data, 'lxml')
+        #find the tables in the page
+        table = soup.find_all('table')
+        #store tables from page
+        ds_table = table[0]
+        us_table = table[1]
+        cm_table = table[2]
+    except:
+        return [str(datetime.datetime.now()), [],[],[],[],[],[-1]]
     
     #get headers for the 3 tables, then parse the tables into nested arrays
     ds_headers = [th.text.strip() for th in ds_table.find_all('th')]
